@@ -107,23 +107,7 @@ if [ "$1" = 'reset' ]; then
     exit
 fi
 
-if [ "$2" = '' ]; then
-    :
-    elif [ "$2" = "TrollStore" ] | [ "$2" = "Pogo" ] ; then
-    :
-    else
-        echo "[-] Not a option, TrollStore or Pogo"
-        exit
-fi
-
 if [ "$2" = 'TrollStore' ]; then
-    if [ -z "$3" ]; then
-        echo "[-] Please pass an uninstallable system app to use (Tips is a great choice)"
-        exit
-    fi
-fi
-
-if [ "$2" = 'Pogo' ]; then
     if [ -z "$3" ]; then
         echo "[-] Please pass an uninstallable system app to use (Tips is a great choice)"
         exit
@@ -209,7 +193,7 @@ else
 fi
 
 if [ "$check" = '0x8010' ] || [ "$check" = '0x8015' ] || [ "$check" = '0x8011' ] || [ "$check" = '0x8012' ]; then
-    "$oscheck"/iBoot64Patcher work/iBSS.dec work/iBSS.patched -b "rd=md0 debug=0x2014e -v wdt=-1 `if [ -z "$2" ]; then :; else echo "$2=$3"; fi`" -n
+    "$oscheck"/iBoot64Patcher work/iBSS.dec work/iBSS.patched -b "rd=md0 debug=0x2014e -v wdt=-1 `if [ -z "$2" ]; then :; else echo "TrollStore=$3"; fi`" -n
 else
     "$oscheck"/iBoot64Patcher work/iBSS.dec work/iBSS.patched
 fi
@@ -218,7 +202,7 @@ fi
 if [ "$check" = '0x8010' ] || [ "$check" = '0x8015' ] || [ "$check" = '0x8011' ] || [ "$check" = '0x8012' ]; then
     :
 else
-    "$oscheck"/iBoot64Patcher work/iBEC.dec work/iBEC.patched -b "rd=md0 debug=0x2014e -v wdt=-1 `if [ -z "$2" ]; then :; else echo "$2=$3"; fi` `if [ "$check" = '0x8960' ] || [ "$check" = '0x7000' ] || [ "$check" = '0x7001' ]; then echo "-restore"; fi`" -n
+    "$oscheck"/iBoot64Patcher work/iBEC.dec work/iBEC.patched -b "rd=md0 debug=0x2014e -v wdt=-1 `if [ -z "$2" ]; then :; else echo "TrollStore=$3"; fi` `if [ "$check" = '0x8960' ] || [ "$check" = '0x7000' ] || [ "$check" = '0x7001' ]; then echo "-restore"; fi`" -n
     "$oscheck"/img4 -i work/iBEC.patched -o sshramdisk/iBEC.img4 -M work/IM4M -A -T ibec
 fi
 
@@ -255,12 +239,12 @@ else
     "$oscheck"/hfsplus work/ramdisk.dmg grow 250000000 > /dev/null
 
     if [ "$replace" = 'j42dap' ]; then
-        "$oscheck"/hfsplus work/ramdisk.dmg untar sshtars/atvssh.tar > /dev/null
+        "$oscheck"/hfsplus work/ramdisk.dmg untar sshtars/atvssh.tar.gz > /dev/null
     elif [ "$check" = '0x8012' ]; then
-        "$oscheck"/hfsplus work/ramdisk.dmg untar sshtars/t2ssh.tar > /dev/null
+        "$oscheck"/hfsplus work/ramdisk.dmg untar sshtars/t2ssh.tar.gz > /dev/null
         echo "[!] WARNING: T2 MIGHT HANG AND DO NOTHING WHEN BOOTING THE RAMDISK!"
     else
-        "$oscheck"/hfsplus work/ramdisk.dmg untar sshtars/ssh.tar > /dev/null
+        "$oscheck"/hfsplus work/ramdisk.dmg untar sshtars/ssh.tar.gz > /dev/null
     fi
 fi
 "$oscheck"/img4 -i work/ramdisk.dmg -o sshramdisk/ramdisk.img4 -M work/IM4M -A -T rdsk
