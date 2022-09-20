@@ -1,8 +1,7 @@
 .DS_Store
-Darwin/gaster
-Linux/gaster
 work
 sshramdisk
 .irecovery
 dump.raw
 dumped.shsh
+*.shsh2
