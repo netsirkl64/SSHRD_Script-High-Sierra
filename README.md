@@ -19,6 +19,8 @@ Create and boot a SSH ramdisk on checkm8 devices
 
 1. A computer running macOS/linux
 2. A checkm8 device (A7-A11)
+<del>
+
 3. [libgeneral 32](https://github.com/tihmstar/libgeneral/tree/254b42f067893ce32a10e8a99b2dfbec2149cb54) must be present on your system for this to work
 ```
 git clone --recursive https://github.com/tihmstar/libgeneral.git
@@ -31,6 +33,8 @@ sudo make install
 ls /usr/local/lib/libgeneral*
 cd ..
 ```
+
+</del>
 
 # Usage
 
