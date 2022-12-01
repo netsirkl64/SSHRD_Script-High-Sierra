@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -e
-
 oscheck=$(uname)
 
 ERR_HANDLER () {
@@ -127,25 +125,32 @@ if [ "$1" = 'boot' ]; then
         exit
     fi
 
-    "$oscheck"/gaster pwn > /dev/null
-    "$oscheck"/gaster reset > /dev/null
+    "$oscheck"/gaster pwn
+    sleep 1
+    "$oscheck"/gaster reset
+    sleep 1
     "$oscheck"/irecovery -f sshramdisk/iBSS.img4
     sleep 2
-    
+    "$oscheck"/irecovery -f sshramdisk/iBEC.img4
     if [ "$check" = '0x8010' ] || [ "$check" = '0x8015' ] || [ "$check" = '0x8011' ] || [ "$check" = '0x8012' ]; then
-        :
-    else
-        "$oscheck"/irecovery -f sshramdisk/iBEC.img4
-        sleep 3
+        sleep 1
+        "$oscheck"/irecovery -c go
     fi
-    
+    sleep 1
     "$oscheck"/irecovery -f sshramdisk/ramdisk.img4
+    sleep 1
     "$oscheck"/irecovery -c ramdisk
+    sleep 1
     "$oscheck"/irecovery -f sshramdisk/devicetree.img4
+    sleep 1
     "$oscheck"/irecovery -c devicetree
+    sleep 1
     "$oscheck"/irecovery -f sshramdisk/trustcache.img4
+    sleep 1
     "$oscheck"/irecovery -c firmware
+    sleep 1
     "$oscheck"/irecovery -f sshramdisk/kernelcache.img4
+    sleep 1
     "$oscheck"/irecovery -c bootx
 
     echo "[*] Device should now show text on screen"
