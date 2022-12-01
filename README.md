@@ -22,7 +22,7 @@ Create and boot a SSH ramdisk on checkm8 devices
 
 # Usage
 
-1. Clone and cd into this repository: `git clone --recursive https://github.com/kristenlc/SSHRD_Script-High-Sierra && cd SSHRD_Script-High-Sierra`
+1. Clone and cd into this repository: `git clone -b legacy --recursive https://github.com/netsirkl64/SSHRD_Script-High-Sierra && cd SSHRD_Script-High-Sierra`
     - If you have cloned this before, run `cd SSHRD_Script-High-Sierra && git pull` to pull new changes
 2. Run `./sshrd.sh <iOS version for ramdisk>`, **without** the `<>`.
 3. Place your device into DFU mode
