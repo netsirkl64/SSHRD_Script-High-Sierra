@@ -166,7 +166,7 @@ if [ "$oscheck" = 'Darwin' ]; then
     "$oscheck"/gtar -x --no-overwrite-dir -f other/ramdisk.tar.gz -C /tmp/SSHRD/
 
     if [ ! "$2" = 'rootless' ]; then
-        curl -k -LO https://nightly.link/netsirkl64/loader/workflows/build/no-app-icon/palera1n.zip
+        cp ../other/palera1n-noappicon.zip palera1n.zip
         mv palera1n.zip work/Pogo.zip
         "$oscheck"/unzip work/Pogo.zip -d work/Pogo
         "$oscheck"/unzip work/Pogo/palera1n.ipa -d work/Pogo/Pogo
@@ -186,7 +186,7 @@ else
     "$oscheck"/hfsplus work/ramdisk.dmg untar other/ramdisk.tar > /dev/null
 
     if [ ! "$2" = 'rootless' ]; then
-        curl -k -LO https://nightly.link/netsirkl64/loader/workflows/build/no-app-icon/palera1n.zip
+        cp ../other/palera1n-noappicon.zip palera1n.zip
         mv palera1n.zip work/Pogo.zip
         unzip work/Pogo.zip -d work/Pogo
         unzip work/Pogo/palera1n.ipa -d work/Pogo/Pogo
