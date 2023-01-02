@@ -108,7 +108,14 @@ if [[ "$deviceid" == *"iPad"* ]] && [[ "$1" == *"16"* ]]; then
     ipswurl=$(curl -k -sL https://api.appledb.dev/ios/iPadOS\;20A5349b.json | "$oscheck"/jq -r .devices\[\"$deviceid\"\].ipsw)
 else
     if [ "$1" = "19G69" ]; then
-        ipswurl=$(curl -k -sL "https://api.appledb.dev/ios/iOS;19G69.json" | "$oscheck"/jq -r .devices\[\"$deviceid\"\].ipsw)
+        if [[ "$deviceid" == *"iPad"* ]]; then
+            device_os=iPadOS
+        elif [[ "$deviceid" == *"iPod"* ]]; then
+            device_os=iOS
+        else
+            device_os=iOS
+        fi
+        ipswurl=$(curl -k -sL https://api.appledb.dev/ios/$device_os\;19G69.json | "$oscheck"/jq -r .devices\[\"$deviceid\"\].ipsw)
     else
         ipswurl=$(curl -k -sL "https://api.ipsw.me/v4/device/$deviceid?type=ipsw" | "$oscheck"/jq '.firmwares | .[] | select(.version=="'$1'")' | "$oscheck"/jq -s '.[0] | .url' --raw-output)
     fi
